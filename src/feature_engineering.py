@@ -271,7 +271,7 @@ class FeatureEngineer:
                     volatility_forecast[date] = conditional_vol[date]
 
             # Forward fill for missing dates
-            volatility_forecast = volatility_forecast.fillna(method='ffill')
+            volatility_forecast = volatility_forecast.ffill()
 
             # Store in dataframe
             self.data['garch_volatility'] = volatility_forecast

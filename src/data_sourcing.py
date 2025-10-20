@@ -189,10 +189,10 @@ class DataDownloader:
         initial_rows = len(data)
 
         # Forward fill missing values (use previous day's value)
-        data = data.fillna(method='ffill')
+        data = data.ffill()
 
         # Backward fill any remaining NaN at the beginning
-        data = data.fillna(method='bfill')
+        data = data.bfill()
 
         # Drop rows with any remaining NaN values
         data = data.dropna()
@@ -326,7 +326,7 @@ def merge_market_data(sp500_data, vix_data):
     merged = sp500_data.join(vix_data, how='left')
 
     # Forward fill VIX values if there are any missing
-    merged['vix'] = merged['vix'].fillna(method='ffill')
+    merged['vix'] = merged['vix'].ffill()
 
     logger.info(f"Merged data shape: {merged.shape}")
 
